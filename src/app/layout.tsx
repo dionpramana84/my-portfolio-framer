@@ -1,8 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { Inter as FontSans } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from "@/lib/utils";
+
+import MainLayout from "@/components/main-layout";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+} from "@radix-ui/react-navigation-menu";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/mode-toggle";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +32,70 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased ",
+          fontSans.variable
+        )}
+      ></body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="absolute w-full">
+            <MainLayout className="flex items-center justify-between h-px-48">
+              <div className="flex justify-center">
+                <NavigationMenu>
+                  <NavigationMenuList className="group flex flex-row flex-1 list-none items-center justify-center space-x-1">
+                    <NavigationMenuItem>
+                      <Link href="/" legacyBehavior passHref>
+                        <Button size="sm" variant="ghost">
+                          Home
+                        </Button>
+                      </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <Link href="/about" legacyBehavior passHref>
+                        <Button size="sm" disabled variant="ghost">
+                          About
+                        </Button>
+                      </Link>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </div>
+              <div className="flex justify-center">
+                {" "}
+                <ModeToggle />
+              </div>
+              <div className="flex justify-center">
+                <NavigationMenu>
+                  <NavigationMenuList className="group flex flex-row flex-1 list-none items-center justify-center space-x-1">
+                    <NavigationMenuItem>
+                      <Link href="/about" legacyBehavior passHref>
+                        <Button size="sm" variant="ghost">
+                          About
+                        </Button>
+                      </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <Link href="/project" legacyBehavior passHref>
+                        <Button size="sm" variant="ghost">
+                          Project
+                        </Button>
+                      </Link>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </div>
+            </MainLayout>
+          </div>
+          <main>{children}</main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
