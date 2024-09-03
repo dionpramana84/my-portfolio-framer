@@ -2,12 +2,15 @@
 
 import React, { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import projectsData from "../../../../public/content/projects";
+import projectsData from "../../../../public/content/frontEndDeveloperContent";
 import DelayedFading from "@/animation/delayed-fading";
 import MainLayout from "@/components/main-layout";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export default function Page() {
   const { id } = useParams();
@@ -17,13 +20,11 @@ export default function Page() {
 
   useEffect(() => {
     if (!data) {
-      // Redirect to /front-end-developer if the id is invalid
       router.push("/front-end-developer");
     }
   }, [data, router]);
 
   if (!data) {
-    // Return null while the redirect is happening
     return null;
   }
 
@@ -39,16 +40,31 @@ export default function Page() {
         <DelayedFading className="w-full">
           <MainLayout>
             <div className="w-full flex justify-between">
-              <div>
+              <div className="w-[70vw]">
                 <h1 className="text-4xl font-black">{data.type}</h1>
                 <p className="text-7xl font-black">{data.name.toUpperCase()}</p>
               </div>
               <div className="flex flex-col self-end text-right">
+                <Link
+                  href={data.link ?? ""}
+                  target="_blank"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <Button
+                    variant="outline"
+                    className="mb-[16px]"
+                    disabled={!data.link}
+                  >
+                    VISIT SITE <ArrowTopRightIcon />
+                  </Button>
+                </Link>
                 <p className="font-black">{data.employment_type}</p>
                 <p>
-                  {dayjs(data.start_date).format("MMM YYYY")} -{" "}
-                  {data.end_date !== null
-                    ? dayjs(data.end_date).format("MMM YYYY")
+                  {dayjs(data.started_on).format("MMM YYYY")} -{" "}
+                  {data.finished_on !== null
+                    ? dayjs(data.finished_on).format("MMM YYYY")
                     : "Now"}
                 </p>
               </div>

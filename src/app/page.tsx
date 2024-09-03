@@ -4,26 +4,8 @@ import MainLayout from "@/components/main-layout";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [fade, setFade] = useState(false);
-
-  const images = ["/dion-1.png", "/dion-2.png"];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(true);
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setFade(false);
-      }, 400);
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [images.length]);
-
   return (
     <>
       <div className="flex h-[calc(100vh-84px)] items-center justify-between pt-[68px] ">
@@ -34,7 +16,7 @@ export default function Home() {
                 <ArrowTopRightIcon className="h-[1.2rem] w-[1.2rem]" />
               </div>
               <Link href="/mining-engineer">
-                <div className="relative !h-[300px] w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] transition-all duration-300 ease">
+                <div className="relative !h-[45vh] w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] transition-all duration-300 ease">
                   <Image
                     src="/mining.png"
                     alt="Photo by Drew Beamer"
@@ -46,7 +28,7 @@ export default function Home() {
                 </div>
               </Link>
               <Link href="/front-end-developer">
-                <div className="relative !h-[300px] w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] transition-all duration-300 ease">
+                <div className="relative !h-[45vh] w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] transition-all duration-300 ease">
                   <Image
                     src="/web-dev.png"
                     alt="Photo by Drew Beamer"
@@ -58,12 +40,10 @@ export default function Home() {
                 </div>
               </Link>
               <div
-                className={`relative !h-[300px] w-[500px] !aspect-[4/3] filter grayscale hover:grayscale-0 transition duration-300 ease ${
-                  fade ? "opacity-0" : "opacity-100"
-                }`}
+                className={`relative !h-[45vh] w-[500px] !aspect-[4/3] filter grayscale hover:grayscale-0`}
               >
                 <Image
-                  src={images[currentImageIndex]}
+                  src="/dion-2.png"
                   alt="Photo by Drew Beamer"
                   fill
                   sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"
@@ -78,7 +58,7 @@ export default function Home() {
                 <span className="opacity-50">I GEDE</span> DION PRAMANA{" "}
                 <span className="opacity-50">UTAMA</span>
               </h1>
-              <p className="text-9xl font-black">PORTOFOLIO</p>
+              <p className="text-9xl font-black">PORTFOLIO</p>
             </div>
           </MainLayout>
         </div>

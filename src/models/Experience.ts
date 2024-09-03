@@ -1,5 +1,6 @@
 export default interface Experience {
-  title: string;
+  id: string;
+  name: string;
   employment_type:
     | "Full-time"
     | "Part-time"
@@ -12,6 +13,8 @@ export default interface Experience {
   place: string;
   started_on: string;
   finished_on: string;
-  description: React.ReactNode;
-  skill: string;
+  description: TrustedHTML;
+  skills: string[];
+  image_thumbnail?: string;
+  images?: string[];
 }
