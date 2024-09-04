@@ -11,6 +11,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import ImageGifCard from "@/components/image-gif-card";
+import BannerSimpleContent from "@/components/banner-simple-content";
+import PageBanner from "@/components/page-banner";
+import BannerMediumContent from "@/components/banner-medium-content";
 
 export default function Page() {
   const { id } = useParams();
@@ -30,61 +34,19 @@ export default function Page() {
 
   return (
     <>
-      <div
-        style={{
-          background:
-            "linear-gradient(0deg, rgb(8 8 8 ) 0%, rgb(10 10 10 / 10%) 79.48%)",
-        }}
-        className="flex h-[50vh] items-end justify-between"
-      >
-        <DelayedFading className="w-full">
-          <MainLayout>
-            <div className="w-full flex justify-between">
-              <div className="w-[70vw]">
-                <h1 className="text-4xl font-black">{data.type}</h1>
-                <p className="text-7xl font-black">{data.name.toUpperCase()}</p>
-              </div>
-              <div className="flex flex-col self-end text-right">
-                <Link
-                  href={data.link ?? ""}
-                  target="_blank"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
-                  <Button
-                    variant="outline"
-                    className="mb-[16px]"
-                    disabled={!data.link}
-                  >
-                    VISIT SITE <ArrowTopRightIcon />
-                  </Button>
-                </Link>
-                <p className="font-black">{data.employment_type}</p>
-                <p>
-                  {dayjs(data.started_on).format("MMM YYYY")} -{" "}
-                  {data.finished_on !== null
-                    ? dayjs(data.finished_on).format("MMM YYYY")
-                    : "Now"}
-                </p>
-              </div>
-            </div>
-          </MainLayout>
-        </DelayedFading>
-
-        <DelayedFading
-          className={`absolute w-full h-[50vh] top-0 z-[-1] brightness-50 invert-0`}
-        >
-          <Image
-            src={data.image_thumbnail}
-            alt="Photo by Drew Beamer"
-            fill
-            className="object-cover"
-            priority
-            quality={50}
-          />
-        </DelayedFading>
-      </div>
+      <PageBanner height="50vh">
+        <BannerMediumContent
+          employment_type={data.employment_type}
+          finished_on={data.finished_on}
+          name={data.name}
+          started_on={data.started_on}
+          type={data.employment_type}
+          image_gif={data.image_gif!}
+          image_thumbnail={data.image_thumbnail}
+          link={data.link}
+          height="50vh"
+        />
+      </PageBanner>
 
       <MainLayout>
         <div className="my-[156px] flex justify-center">
@@ -104,21 +66,9 @@ export default function Page() {
         </div>
       </MainLayout>
 
-      <div className="grid grid-cols-3 w-full my-[156px] gap-4">
-        {data.images.map((project, index) => (
-          <div
-            key={index}
-            className="relative flex-grow h-full p-[24px] border-solid border-right border-[0.5px] border-2 border-[#1c1c1c] hover:bg-zinc-900 transition-all duration-300 ease-in-out cursor-pointer"
-          >
-            <div className="relative w-full aspect-square object-cover rounded-2xl">
-              <Image
-                src={project}
-                alt="Photo by Dion Pramana"
-                fill
-                className="w-full h-full object-cover rounded-2xl"
-              />
-            </div>
-          </div>
+      <div className="grid grid-cols-3 w-full my-[156px]">
+        {data.images.map((image, index) => (
+          <ImageGifCard image_thumbnail={image} key={index} index={index} />
         ))}
       </div>
     </>

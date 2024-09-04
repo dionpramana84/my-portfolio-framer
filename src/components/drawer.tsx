@@ -36,10 +36,6 @@ export default function DrawerComponent() {
       href: "/mining-engineer",
     },
     {
-      title: "Projects",
-      href: "/projects",
-    },
-    {
       title: "Contact",
       href: "/contact",
     },
@@ -48,22 +44,22 @@ export default function DrawerComponent() {
   const menuIcons = [
     {
       icon: <GitHubLogoIcon className="h-6 w-6" />,
-      href: "https://github.com/dionpramana",
+      href: "https://github.com/dionpramana84",
     },
     {
       icon: <LinkedInLogoIcon className="h-6 w-6" />,
-      href: "https://www.linkedin.com/in/dionpramana/",
+      href: "https://www.linkedin.com/in/dion-pramana/",
     },
     {
       icon: <InstagramLogoIcon className="h-6 w-6" />,
-      href: "https://www.instagram.com/dionpramana/",
+      href: "https://www.instagram.com/dionpramanaa/",
     },
   ];
 
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" className="!px-0">
           <MenuIcon className="h-6 w-6" />
         </Button>
       </DrawerTrigger>
@@ -87,7 +83,7 @@ export default function DrawerComponent() {
             {menuIcons.map((menuIcon, index) => {
               return (
                 <div key={index}>
-                  <Link href={menuIcon.href}>
+                  <Link href={menuIcon.href} target="_blank">
                     <DrawerClose>
                       <Button variant="link">{menuIcon.icon} </Button>
                     </DrawerClose>

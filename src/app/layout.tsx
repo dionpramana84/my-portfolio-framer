@@ -3,8 +3,9 @@ import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import Header from "@/components/header";
 import Footer from "@/components/footer";
+import StickyCursor from "@/components/sticky-cursor";
+import HeaderLayout from "@/components/header-layout";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -30,8 +31,11 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <Header />
-          <main>{children}</main>
+          <HeaderLayout />
+          <main>
+            <StickyCursor />
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

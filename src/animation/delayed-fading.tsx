@@ -15,16 +15,20 @@ export default function DelayedFading({
   children,
   className,
   style,
+  delay,
+  duration,
 }: {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  delay?: number;
+  duration?: number;
 }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ ease: "easeIn", delay: 0.2, duration: 1 }}
+      transition={{ ease: "easeIn", delay: delay, duration: duration }}
       className={className}
       style={style}
     >
