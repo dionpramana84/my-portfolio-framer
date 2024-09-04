@@ -21,7 +21,6 @@ export default function FrontEndDeveloper() {
               <span className="opacity-80">UTAMA</span>
             </>
           }
-          height="50vh"
         />
       </PageBanner>
       <div className="my-[84px]">

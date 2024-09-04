@@ -11,17 +11,16 @@ export default function MiningEngineer() {
   const router = useRouter();
   return (
     <>
-      <PageBanner>
+      <PageBanner height="50vh">
         <BannerSimpleContent
           image="/mining-2.png"
-          title="Front End Developer"
+          title="Mining Engineer"
           subTitle={
             <>
               <span className="opacity-80">I GEDE</span> DION PRAMANA{" "}
               <span className="opacity-80">UTAMA</span>
             </>
           }
-          height="50vh"
         />
       </PageBanner>
       <div className="my-[84px]">

@@ -8,12 +8,10 @@ export default function BannerSimpleContent({
   title,
   subTitle,
   image,
-  height = "50vh",
 }: {
   title: string;
   subTitle: JSX.Element;
   image: string;
-  height?: string;
 }) {
   return (
     <>
@@ -31,9 +29,16 @@ export default function BannerSimpleContent({
         </MainLayout>
       </div>
       <DelayedFading
-        className={`absolute w-full h-[${height}] top-0 z-[-1] brightness-50 invert-0`}
+        className={`absolute w-full h-[50vh] top-0 z-[-1] brightness-50 invert-0`}
       >
-        <Image src={image} alt={image} fill className="object-cover" priority />
+        <Image
+          src={image}
+          alt={image}
+          fill
+          className="object-cover"
+          priority
+          quality={50}
+        />
       </DelayedFading>
     </>
   );

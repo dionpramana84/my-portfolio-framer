@@ -42,7 +42,7 @@ export default function Page() {
           started_on={data.started_on}
           type={data.employment_type}
           image_gif={data.image_gif!}
-          image_thumbnail={data.image_thumbnail}
+          image_thumbnail={data.image_thumbnail ? data.image_thumbnail : "/barong_statue.png"}
           link={data.link}
           height="50vh"
         />

@@ -38,7 +38,9 @@ export default function Page() {
           name={data.name}
           started_on={data.started_on}
           type={data.employment_type}
-          image_thumbnail={data.image_thumbnail!}
+          image_thumbnail={
+            data.image_thumbnail ? data.image_thumbnail : "/mining-3.png"
+          }
           height="50vh"
         />
       </PageBanner>
