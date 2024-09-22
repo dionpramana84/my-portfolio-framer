@@ -11,7 +11,7 @@ export default function MiningEngineer() {
   const router = useRouter();
   return (
     <>
-      <PageBanner height="50vh">
+      <PageBanner>
         <BannerSimpleContent
           image="/mining-2.png"
           title="Mining Engineer"
@@ -25,9 +25,9 @@ export default function MiningEngineer() {
       </PageBanner>
       <div className="my-[84px]">
         <MainLayout>
-          <p className="text-4xl font-black mb-[24px]">EXPERIENCES</p>
+          <h6 className="font-black mb-[24px]">EXPERIENCES</h6>
         </MainLayout>
-        <div className="grid grid-cols-3 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
           {experienceData.map((experience, index) => (
             <ImageGifCard
               finished_on={experience.finished_on}

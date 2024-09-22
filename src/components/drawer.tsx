@@ -70,8 +70,8 @@ export default function DrawerComponent() {
               <div key={index} className="flex justify-center">
                 <Link href={menu.href}>
                   <DrawerClose>
-                    <Button variant="link" className="text-5xl font-bold">
-                      {menu.title}
+                    <Button variant="link" className="font-bold">
+                      <h5>{menu.title}</h5>
                     </Button>
                   </DrawerClose>
                 </Link>

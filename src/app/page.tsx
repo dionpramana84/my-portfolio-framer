@@ -16,94 +16,53 @@ export default function Home() {
                 <ArrowTopRightIcon className="h-[1.2rem] w-[1.2rem]" />
               </div>
               <Link href="/mining-engineer">
-                <div className="relative !h-[45vh] w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] transition-all duration-300 ease">
+                <div className="relative !h-[45vh] w-[80px] md:w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] md:hover:w-[200px] xl:hover:w-[250px] transition-all duration-300 ease group">
                   <Image
                     src="/mining.png"
                     alt="Photo by Drew Beamer"
                     fill
                     sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"
-                    className="rounded-md object-cover !static"
+                    className="rounded-md object-cover !static group-hover:w-[200px] md:group-hover:w-[200px] xl:group-hover:w-[250px] transition-all duration-300 ease"
                     priority
                   />
                 </div>
               </Link>
               <Link href="/front-end-developer">
-                <div className="relative !h-[45vh] w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] transition-all duration-300 ease">
+                <div className="relative !h-[45vh] w-[80px] md:w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[100px] md:hover:w-[200px] xl:hover:w-[250px] transition-all duration-300 ease group">
                   <Image
                     src="/web-dev.png"
                     alt="Photo by Drew Beamer"
                     fill
                     sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"
-                    className="rounded-md object-cover !static"
+                    className="rounded-md object-cover !static group-hover:w-[100px] md:group-hover:w-[200px] xl:group-hover:w-[250px] transition-all duration-300 ease"
                     priority
                   />
                 </div>
               </Link>
               <div
-                className={`relative !h-[45vh] w-[500px] !aspect-[4/3] filter grayscale hover:grayscale-0`}
+                className={`relative !h-[45vh] w-[300px] md:!w-[500px] !aspect-[4/3] filter grayscale hover:grayscale-0 hidden md:block`}
               >
                 <Image
                   src="/dion-2.png"
                   alt="Photo by Drew Beamer"
                   fill
                   sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"
-                  className="rounded-md object-cover !static "
+                  className="rounded-md object-cover !static"
                   priority
                 />
               </div>
             </div>
 
             <div className="w-full">
-              <h1 className="text-4xl font-black">
+              <h6 className="font-black">
                 <span className="opacity-50">I GEDE</span> DION PRAMANA{" "}
                 <span className="opacity-50">UTAMA</span>
-              </h1>
-              <p className="text-9xl font-black">PORTFOLIO</p>
+              </h6>
+              <h1 className="font-black">PORTFOLIO</h1>
             </div>
           </MainLayout>
         </div>
       </div>
-      {/* <MainLayout>
-
-        <div className="h-full w-full grid grid-cols-3 gap-[16px] !my-[160px]">
-          <div className="w-full grid col-span-1">
-            <Card>
-              <CardHeader>
-                <CardTitle>Mining Related Skills</CardTitle>
-              </CardHeader>
-              <CardContent className="grid gap-[16px]">
-                <ProgressCard src="/mining.png" title="Auto CAD" value={70} />
-                <ProgressCard src="/mining.png" title="Mircomine" value={60} />
-                <ProgressCard src="/mining.png" title="Surpac" value={65} />
-                <ProgressCard
-                  src="/mining.png"
-                  title="Mine Planning"
-                  value={60}
-                />
-              </CardContent>
-              <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="leading-none text-muted-foreground">
-                  Showing skills level based on years of experience
-                </div>
-              </CardFooter>
-            </Card>
-          </div>
-          <div className="grid col-span-2 gap-[16px]">
-            {experienceData.map((experience, index) => (
-              <ExperienceDrawerComponent
-                key={index}
-                employment_type={experience.employment_type}
-                title={experience.title}
-                place={experience.place}
-                started_on={experience.started_on}
-                finished_on={experience.finished_on}
-                skill={experience.skill}
-                description={experience.description}
-              />
-            ))}
-          </div>
-        </div>
-      </MainLayout> */}
     </>
   );
 }

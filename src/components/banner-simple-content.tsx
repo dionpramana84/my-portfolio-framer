@@ -22,8 +22,8 @@ export default function BannerSimpleContent({
               <HeaderContent />
             </div>
             <div className="w-full h-full text-center self-end flex flex-col justify-center">
-              <h1 className="text-4xl font-black">{subTitle}</h1>
-              <p className="text-7xl font-black">{title}</p>
+              <h6 className="font-black">{subTitle}</h6>
+              <h3 className="font-black">{title}</h3>
             </div>
           </DelayedFading>
         </MainLayout>

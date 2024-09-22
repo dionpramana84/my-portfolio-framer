@@ -91,6 +91,7 @@
 
 body {
   overflow-x: hidden !important;
+  line-height: 1.2;
 }
 
 ol {
@@ -101,4 +102,81 @@ ol {
 ul {
   list-style-type: disc;
   padding-left: 20px;
+}
+
+/* Responsive Typography */
+
+/* Desktop (1024px and above) */
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 128px; /* 9xl in Tailwind */
+  }
+  h2 {
+    font-size: 96px; /* 8xl in Tailwind */
+  }
+  h3 {
+    font-size: 72px; /* 7xl in Tailwind */
+  }
+  h4 {
+    font-size: 60px; /* 6xl in Tailwind */
+  }
+  h5 {
+    font-size: 48px; /* 5xl in Tailwind */
+  }
+  h6 {
+    font-size: 36px; /* 4xl in Tailwind */
+  }
+  p {
+    font-size: 16px; /* base in Tailwind */
+  }
+}
+
+/* Tablet (768px to 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  h1 {
+    font-size: 96px; /* 75% of desktop size */
+  }
+  h2 {
+    font-size: 72px; /* 75% of desktop size */
+  }
+  h3 {
+    font-size: 54px; /* 75% of desktop size */
+  }
+  h4 {
+    font-size: 45px; /* 75% of desktop size */
+  }
+  h5 {
+    font-size: 36px; /* 75% of desktop size */
+  }
+  h6 {
+    font-size: 27px; /* 75% of desktop size */
+  }
+  p {
+    font-size: 14px; /* Slightly smaller than desktop */
+  }
+}
+
+/* Phone (767px and below) */
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 64px; /* 50% of desktop size */
+  }
+  h2 {
+    font-size: 48px; /* 50% of desktop size */
+  }
+  h3 {
+    font-size: 36px; /* 50% of desktop size */
+  }
+  h4 {
+    font-size: 30px; /* 50% of desktop size */
+  }
+  h5 {
+    font-size: 24px; /* 50% of desktop size */
+  }
+  h6 {
+    font-size: 20px; /* 50% of desktop size */
+  }
+  p {
+    font-size: 14px; /* Smaller than tablet for readability on small screens */
+  }
 }

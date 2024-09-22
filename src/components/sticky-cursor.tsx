@@ -30,7 +30,7 @@ export default function StickyCursor() {
 
   return (
     <motion.div
-      className="fixed w-[15px] h-[15px] bg-white rounded-full pointer-events-none z-[9999]"
+      className="fixed w-[15px] h-[15px] bg-white rounded-full pointer-events-none z-[9999] hidden md:block"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
