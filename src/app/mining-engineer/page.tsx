@@ -40,9 +40,7 @@ export default function MiningEngineer() {
                   : "/mining-1.png"
               }
               type={experience.place}
-              onClick={() =>
-                router.push(`/mining-engineer/experience/${experience.id}`)
-              }
+              href={`/mining-engineer/experience/${experience.id}`}
               index={index}
             />
           ))}

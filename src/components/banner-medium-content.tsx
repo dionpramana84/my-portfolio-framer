@@ -49,22 +49,25 @@ export default function BannerMediumContent({
                   </div>
                   <div className="flex flex-col self-end text-left md:text-right">
                     {link ? (
-                      <Link href={link} target="_blank">
-                        <Button
-                          variant="outline"
-                          className="mb-[16px] w-full md:w-auto"
-                        >
+                      <Link
+                        href={link}
+                        target="_blank"
+                        className="flex justify-end"
+                      >
+                        <Button variant="outline" className="mb-[16px] w-28">
                           VISIT SITE <ArrowTopRightIcon />
                         </Button>
                       </Link>
                     ) : (
-                      <Button
-                        variant="outline"
-                        className="mb-[16px] w-full md:w-auto"
-                        disabled
-                      >
-                        VISIT SITE <ArrowTopRightIcon />
-                      </Button>
+                      <div className="flex justify-end">
+                        <Button
+                          variant="outline"
+                          className="mb-[16px] w-28"
+                          disabled
+                        >
+                          VISIT SITE
+                        </Button>
+                      </div>
                     )}
                     <p className="font-black hidden md:block">
                       {employment_type}

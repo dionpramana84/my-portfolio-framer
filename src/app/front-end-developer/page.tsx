@@ -36,7 +36,7 @@ export default function FrontEndDeveloper() {
               name={project.name}
               image_thumbnail={project.image_thumbnail}
               type={project.employment_type}
-              onClick={() => router.push(`/front-end-developer/${project.id}`)}
+              href={`/front-end-developer/${project.id}`}
               index={index}
             />
           ))}
