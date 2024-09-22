@@ -41,21 +41,27 @@ export default function ImageGifCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {name && (
-        <div className="text-1xl font-black mb-[16px]">
-          {name?.toLocaleUpperCase()}
+        <div className="font-black mb-[16px]">
+          <p>{name?.toLocaleUpperCase()}</p>
         </div>
       )}
-      <div className="relative w-full aspect-square object-cover rounded-3xl">
-        <Image
-          src={image_gif && isHovered ? image_gif : image_thumbnail}
-          alt={name!}
-          blurDataURL={image_thumbnail}
-          fill
-          className="w-full h-full object-cover rounded-3xl"
-          quality={40}
-          placeholder="blur"
-          priority
-        />
+      <div className="relative w-full aspect-square object-cover rounded-xl md:rounded-2xl lg:rounded-3xl overflow-hidden">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+          className="w-full h-full"
+        >
+          <Image
+            src={image_gif && isHovered ? image_gif : image_thumbnail}
+            alt={name!}
+            blurDataURL={image_thumbnail}
+            fill
+            className="w-full h-full object-cover"
+            quality={40}
+            placeholder="blur"
+            priority
+          />
+        </motion.div>
       </div>
       {started_on && (
         <div className="flex justify-between mt-[16px]">

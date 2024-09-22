@@ -37,7 +37,6 @@ export default function Page() {
           finished_on={data.finished_on}
           name={data.name}
           started_on={data.started_on}
-          type={data.employment_type}
           image_thumbnail={
             data.image_thumbnail ? data.image_thumbnail : "/mining-3.png"
           }
@@ -46,9 +45,9 @@ export default function Page() {
       </PageBanner>
 
       <MainLayout>
-        <div className="my-[156px] flex justify-center">
-          <div className="mb-[32px] text-justify  w-[70vw]">
-            <p className="text-2xl font-black">Role : {data.name}</p>
+        <div className="flex justify-center my-[65px] md:my-[128px] lg:my-[156px]">
+          <div className="mb-[32px] text-justify w-full sm:w-[70vw]">
+            <h6 className="text-2xl font-black">Role : {data.name}</h6>
             <br />
             <div dangerouslySetInnerHTML={{ __html: data.description }} />{" "}
             <br />
@@ -63,7 +62,7 @@ export default function Page() {
         </div>
       </MainLayout>
 
-      <div className="grid grid-cols-3 w-full my-[156px] gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-[64px] md:my-[128px] lg:my-[156px]">
         {data.images?.map((image, index) => (
           <ImageGifCard image_thumbnail={image} key={index} index={index} />
         ))}

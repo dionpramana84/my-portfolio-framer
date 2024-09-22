@@ -10,7 +10,6 @@ import HeaderContent from "./header-content";
 export default function BannerMediumContent({
   employment_type,
   name,
-  type,
   started_on,
   finished_on,
   link,
@@ -20,7 +19,6 @@ export default function BannerMediumContent({
 }: {
   employment_type: string;
   name: string;
-  type: string;
   started_on: string;
   finished_on: string | null;
   link?: string | null;
@@ -37,33 +35,48 @@ export default function BannerMediumContent({
               <HeaderContent />
             </div>
             <div className="w-full flex justify-between self-end">
-              <div className="w-[70vw]">
-                <h1 className="text-4xl font-black">{type}</h1>
-                <p className="text-7xl font-black">{name.toUpperCase()}</p>
-              </div>
-              <div className="flex flex-col self-end text-right">
-                <Link
-                  href={link ?? ""}
-                  target="_blank"
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                >
-                  <Button
-                    variant="outline"
-                    className="mb-[16px]"
-                    disabled={!link}
-                  >
-                    VISIT SITE <ArrowTopRightIcon />
-                  </Button>
-                </Link>
-                <p className="font-black">{employment_type}</p>
-                <p>
-                  {dayjs(started_on).format("MMM YYYY")} -{" "}
-                  {finished_on !== null
-                    ? dayjs(finished_on).format("MMM YYYY")
-                    : "Now"}
-                </p>
+              <div className="flex flex-col md:flex-row justify-between w-full">
+                <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full">
+                  <div className="w-full mb-4 md:mb-0">
+                    <p className="font-black md:hidden">
+                      {employment_type} | {dayjs(started_on).format("MMM YYYY")}{" "}
+                      -{" "}
+                      {finished_on !== null
+                        ? dayjs(finished_on).format("MMM YYYY")
+                        : "Now"}
+                    </p>
+                    <h3 className="font-black">{name.toUpperCase()}</h3>
+                  </div>
+                  <div className="flex flex-col self-end text-left md:text-right">
+                    {link ? (
+                      <Link href={link} target="_blank">
+                        <Button
+                          variant="outline"
+                          className="mb-[16px] w-full md:w-auto"
+                        >
+                          VISIT SITE <ArrowTopRightIcon />
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        className="mb-[16px] w-full md:w-auto"
+                        disabled
+                      >
+                        VISIT SITE <ArrowTopRightIcon />
+                      </Button>
+                    )}
+                    <p className="font-black hidden md:block">
+                      {employment_type}
+                    </p>
+                    <p className="hidden md:block">
+                      {dayjs(started_on).format("MMM YYYY")} -{" "}
+                      {finished_on !== null
+                        ? dayjs(finished_on).format("MMM YYYY")
+                        : "Now"}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

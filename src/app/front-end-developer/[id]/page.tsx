@@ -3,16 +3,9 @@
 import React, { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import projectsData from "../../../../public/content/frontEndDeveloperContent";
-import DelayedFading from "@/animation/delayed-fading";
 import MainLayout from "@/components/main-layout";
-import Image from "next/image";
-import dayjs from "dayjs";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowTopRightIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
 import ImageGifCard from "@/components/image-gif-card";
-import BannerSimpleContent from "@/components/banner-simple-content";
 import PageBanner from "@/components/page-banner";
 import BannerMediumContent from "@/components/banner-medium-content";
 
@@ -40,20 +33,21 @@ export default function Page() {
           finished_on={data.finished_on}
           name={data.name}
           started_on={data.started_on}
-          type={data.employment_type}
           image_gif={data.image_gif!}
-          image_thumbnail={data.image_thumbnail ? data.image_thumbnail : "/barong_statue.png"}
+          image_thumbnail={
+            data.image_thumbnail ? data.image_thumbnail : "/barong_statue.png"
+          }
           link={data.link}
           height="50vh"
         />
       </PageBanner>
 
       <MainLayout>
-        <div className="my-[156px] flex justify-center">
-          <div className="mb-[32px] text-justify  w-[70vw]">
-            <p className="text-2xl font-black">Role : {data.role}</p>
+        <div className="flex justify-center my-[65px] md:my-[128px] lg:my-[156px]">
+          <div className="mb-[32px] text-justify w-full sm:w-[70vw]">
+            <h6 className="font-black">Role : {data.role}</h6>
             <br />
-            <p className="text-1xl ">{data.description}</p>
+            <p>{data.description}</p>
             <br />
             <div className="w-[fit-content] flex flex-wrap gap-4 justify-between">
               {data.skills.map((skill, index) => (
@@ -66,7 +60,7 @@ export default function Page() {
         </div>
       </MainLayout>
 
-      <div className="grid grid-cols-3 w-full my-[156px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-[64px] md:my-[128px] lg:my-[156px]">
         {data.images.map((image, index) => (
           <ImageGifCard image_thumbnail={image} key={index} index={index} />
         ))}

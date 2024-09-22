@@ -23,11 +23,11 @@ export default function FrontEndDeveloper() {
           }
         />
       </PageBanner>
-      <div className="my-[84px]">
+      <div className="my-[24px] md:my-[48px] lg:my-[84px]">
         <MainLayout>
-          <p className="text-4xl font-black mb-[24px]">PROJECTS</p>
+          <h6 className="font-black mb-[24px]">PROJECTS</h6>
         </MainLayout>
-        <div className="grid grid-cols-3 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
           {projectsData.map((project, index) => (
             <ImageGifCard
               key={index}

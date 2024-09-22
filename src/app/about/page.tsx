@@ -7,8 +7,8 @@ export default function About() {
     <>
       <MainLayout>
         <div className="h-[calc(100vh-84px)] pt-[104px] w-full flex justify-center items-center">
-          <div className="w-1/2">
-            <h1 className="text-center text-3xl font-bold">About Me</h1>
+          <div className="w-full md:w-1/2">
+            <h6 className="text-center font-bold">About Me</h6>
             <br />
             <p className="text-center">{shortBio}</p>
           </div>
