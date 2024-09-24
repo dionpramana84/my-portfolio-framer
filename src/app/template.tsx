@@ -12,7 +12,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -25,8 +25,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.3 } }}
-          transition={{ duration: 1 }}
-          className="flex items-center justify-center h-screen"
+          transition={{ duration: 1.5 }}
+          className="flex items-center justify-center h-[calc(100vh-84px)]"
         >
           <div className="flex flex-col items-center">
             <Image
@@ -38,9 +38,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
                   : "/logo-dion.png"
               }
               alt="Loading"
-              width={200}
-              height={200}
-              className="mb-4"
+              width={70}
+              height={70}
+              className="mb-4 md:w-[120px] md:h-[auto] lg:w-[120px] lg:h-[auto]"
             />
           </div>
         </motion.div>
