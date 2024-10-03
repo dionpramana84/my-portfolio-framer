@@ -32,8 +32,8 @@ const experienceData: Experience[] = [
         <li>Selected mine design option with 1,800,000 ton/year and 217,000,000 USD income from three options have been created.</li>
       </ol>
     `,
-    image_thumbnail: "/mining-experience-1.png",
-    images: ["/mining-experience-1.png"],
+    image_thumbnail: "/mining-experience-1.webp",
+    images: ["/mining-experience-1.webp"],
   },
   {
     id: "mpd",
@@ -112,8 +112,8 @@ const experienceData: Experience[] = [
     description: `
       <p>Coordinate and assist the Assessment Team to create a competitive Minescape Competition.</p>
     `,
-    image_thumbnail: "/mining-experience-3.png",
-    images: ["/mining-experience-3.png"],
+    image_thumbnail: "/mining-experience-3.webp",
+    images: ["/mining-experience-3.webp"],
   },
 ];
 

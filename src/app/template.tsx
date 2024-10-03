@@ -32,15 +32,15 @@ export default function Template({ children }: { children: React.ReactNode }) {
             <Image
               src={
                 path.includes("front-end-developer")
-                  ? "/loading-laptop.gif"
+                  ? "/loading-laptop.webp"
                   : path.includes("mining-engineer")
-                  ? "/loading-mining.gif"
-                  : "/logo-dion.png"
+                  ? "/loading-mining.webp"
+                  : "/logo-dion.webp"
               }
               alt="Loading"
-              width={70}
-              height={70}
-              className="mb-4 md:w-[120px] md:h-[auto] lg:w-[120px] lg:h-[auto]"
+              width={60}
+              height={60}
+              className="mb-4 w-[60px] h-[auto] md:w-[auto] md:h-[80px] lg:w-[120px] lg:h-[auto]"
             />
           </div>
         </motion.div>

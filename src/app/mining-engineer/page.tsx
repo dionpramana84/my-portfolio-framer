@@ -13,7 +13,7 @@ export default function MiningEngineer() {
     <>
       <PageBanner>
         <BannerSimpleContent
-          image="/mining-2.png"
+          image="/mining-2.webp"
           title="Mining Engineer"
           subTitle={
             <>
@@ -37,7 +37,7 @@ export default function MiningEngineer() {
               image_thumbnail={
                 experience.image_thumbnail
                   ? experience.image_thumbnail
-                  : "/mining-1.png"
+                  : "/mining-1.webp"
               }
               type={experience.place}
               href={`/mining-engineer/experience/${experience.id}`}

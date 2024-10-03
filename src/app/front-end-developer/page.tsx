@@ -13,7 +13,7 @@ export default function FrontEndDeveloper() {
     <>
       <PageBanner>
         <BannerSimpleContent
-          image="/barong-black.png"
+          image="/barong-black.webp"
           title="Front End Developer"
           subTitle={
             <>

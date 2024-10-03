@@ -9,7 +9,7 @@ export default function HeaderContent() {
       <div className="flex justify-start items-center">
         <Link href="/">
           <Image
-            src="/logo-dion.png"
+            src="/logo-dion.webp"
             alt="Logo"
             height={32}
             width={32}

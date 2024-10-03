@@ -9,7 +9,8 @@ export default interface FrontEndDeveloperProject {
   image_thumbnail: string;
   image_gif: string | null;
   skills: string[];
-  started_on: string; // ISO 8601 date string
+  started_on: string;
   finished_on: string | null;
   images: string[];
+  company_name?: string | null;
 }

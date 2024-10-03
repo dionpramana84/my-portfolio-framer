@@ -18,7 +18,7 @@ export default function Home() {
               <Link href="/mining-engineer">
                 <div className="relative !h-[45vh] w-[80px] md:w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] md:hover:w-[200px] xl:hover:w-[250px] transition-all duration-300 ease group">
                   <Image
-                    src="/mining.png"
+                    src="/mining.webp"
                     alt="Photo by Drew Beamer"
                     fill
                     sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"
@@ -30,7 +30,7 @@ export default function Home() {
               <Link href="/front-end-developer">
                 <div className="relative !h-[45vh] w-[80px] md:w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[100px] md:hover:w-[200px] xl:hover:w-[250px] transition-all duration-300 ease group">
                   <Image
-                    src="/web-dev.png"
+                    src="/web-dev.webp"
                     alt="Photo by Drew Beamer"
                     fill
                     sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"
@@ -43,7 +43,7 @@ export default function Home() {
                 className={`relative !h-[45vh] w-[300px] md:!w-[500px] !aspect-[4/3] filter grayscale hover:grayscale-0 hidden md:block`}
               >
                 <Image
-                  src="/dion-2.png"
+                  src="/dion-2.webp"
                   alt="Photo by Drew Beamer"
                   fill
                   sizes="(max-width: 768px) 100%, (max-width: 1200px) 100%"

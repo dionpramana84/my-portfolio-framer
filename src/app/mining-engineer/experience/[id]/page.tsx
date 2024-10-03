@@ -38,7 +38,7 @@ export default function Page() {
           name={data.name}
           started_on={data.started_on}
           image_thumbnail={
-            data.image_thumbnail ? data.image_thumbnail : "/mining-3.png"
+            data.image_thumbnail ? data.image_thumbnail : "/mining-3.webp"
           }
           height="50vh"
         />

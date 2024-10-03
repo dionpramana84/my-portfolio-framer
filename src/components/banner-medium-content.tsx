@@ -6,6 +6,7 @@ import MainLayout from "./main-layout";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import HeaderContent from "./header-content";
+import React from "react";
 
 export default function BannerMediumContent({
   employment_type,
@@ -16,6 +17,7 @@ export default function BannerMediumContent({
   image_thumbnail,
   image_gif,
   height = "50vh",
+  company_name,
 }: {
   employment_type: string;
   name: string;
@@ -25,6 +27,7 @@ export default function BannerMediumContent({
   image_thumbnail: string;
   image_gif?: string;
   height?: string;
+  company_name?: string | null;
 }) {
   return (
     <>
@@ -70,7 +73,8 @@ export default function BannerMediumContent({
                       </div>
                     )}
                     <p className="font-black hidden md:block">
-                      {employment_type}
+                      {employment_type}{" "}
+                      {company_name ? `| ${company_name}` : ""}
                     </p>
                     <p className="hidden md:block">
                       {dayjs(started_on).format("MMM YYYY")} -{" "}

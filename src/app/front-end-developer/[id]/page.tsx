@@ -35,10 +35,11 @@ export default function Page() {
           started_on={data.started_on}
           image_gif={data.image_gif!}
           image_thumbnail={
-            data.image_thumbnail ? data.image_thumbnail : "/barong_statue.png"
+            data.image_thumbnail ? data.image_thumbnail : "/barong_statue.webp"
           }
           link={data.link}
           height="50vh"
+          company_name={data.company_name}
         />
       </PageBanner>
 
