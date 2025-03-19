@@ -1,7 +1,7 @@
 "use client";
 
 import MainLayout from "@/components/main-layout";
-import projectsData from "../../../public/content/frontEndDeveloperContent";
+import projectsData from "../../../../public/content/frontEndDeveloperContent";
 import { useRouter } from "next/navigation";
 import ImageGifCard from "@/components/image-gif-card";
 import PageBanner from "@/components/page-banner";

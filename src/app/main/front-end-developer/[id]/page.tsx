@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import projectsData from "../../../../public/content/frontEndDeveloperContent";
+import projectsData from "../../../../../public/content/frontEndDeveloperContent";
 import MainLayout from "@/components/main-layout";
 import { Badge } from "@/components/ui/badge";
 import ImageGifCard from "@/components/image-gif-card";

@@ -25,19 +25,19 @@ export default function DrawerComponent() {
     },
     {
       title: "About",
-      href: "/about",
+      href: "/main/about",
     },
     {
       title: "Front End Developer",
-      href: "/front-end-developer",
+      href: "/main/front-end-developer",
     },
     {
       title: "Mining Engineer",
-      href: "/mining-engineer",
+      href: "/main/mining-engineer",
     },
     {
       title: "Contact",
-      href: "/contact",
+      href: "/main/contact",
     },
   ];
 

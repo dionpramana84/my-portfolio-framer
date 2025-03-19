@@ -1,11 +1,11 @@
 "use client";
 
-import MainLayout from "@/components/main-layout";
-import { useRouter } from "next/navigation";
-import experienceData from "../../../public/content/miningContent";
-import PageBanner from "@/components/page-banner";
-import ImageGifCard from "@/components/image-gif-card";
 import BannerSimpleContent from "@/components/banner-simple-content";
+import ImageGifCard from "@/components/image-gif-card";
+import PageBanner from "@/components/page-banner";
+import { useRouter } from "next/navigation";
+import experienceData from "../../../../public/content/miningContent";
+import MainLayout from "../layout";
 
 export default function MiningEngineer() {
   const router = useRouter();
