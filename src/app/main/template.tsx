@@ -37,6 +37,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                   ? "/loading-mining.webp"
                   : "/logo-dion.webp"
               }
+              priority
               alt="Loading"
               width={60}
               height={60}
