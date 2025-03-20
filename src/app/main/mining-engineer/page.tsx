@@ -40,7 +40,7 @@ export default function MiningEngineer() {
                   : "/mining-1.webp"
               }
               type={experience.place}
-              href={`/mining-engineer/experience/${experience.id}`}
+              href={`/main/mining-engineer/${experience.id}`}
               index={index}
             />
           ))}

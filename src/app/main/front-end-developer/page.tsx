@@ -36,7 +36,7 @@ export default function FrontEndDeveloper() {
               name={project.name}
               image_thumbnail={project.image_thumbnail}
               type={project.employment_type}
-              href={`/front-end-developer/${project.id}`}
+              href={`/main/front-end-developer/${project.id}`}
               index={index}
             />
           ))}

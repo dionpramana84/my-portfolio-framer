@@ -24,7 +24,7 @@ export default function RootLayout({
 
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar variant="inset" />
       <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );

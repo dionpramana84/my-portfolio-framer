@@ -110,12 +110,17 @@ body {
   line-height: 1.2;
 }
 
-ol {
-  list-style-type: none;
+/* Apply list style based on path */
+ol,
+ul {
+  list-style-type: dot;
+  padding-left: 20px;
 }
 
-ul {
+body:not([data-path^="/dashboard"]) ol,
+body:not([data-path^="/dashboard"]) ul {
   list-style-type: none;
+  padding: 0px;
 }
 
 /* Responsive Typography */
