@@ -19,27 +19,36 @@ import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 import useUserSession from "@/hooks/firebase/user-session";
 import Link from "next/link";
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+
+const data = [
+  {
+    title: "Profile",
+    url: "/dashboard",
+    icon: LayoutDashboardIcon,
   },
-  navMain: [
-    {
-      title: "Profile",
-      url: "/main/dashboard",
-      icon: LayoutDashboardIcon,
-    },
-    {
-      title: "Project",
-      url: "/main/project",
-      icon: ProjectorIcon,
-    },
-  ],
-};
+  {
+    title: "Project",
+    icon: ProjectorIcon,
+    items: [
+      {
+        title: "Front End Developer",
+        url: "/dashboard/project/front-end-developer",
+      },
+      {
+        title: "Mining Engineering",
+        url: "/dashboard/project/mining-engineering",
+      },
+    ],
+  },
+  {
+    title: "Experience",
+    url: "/dashboard/experience",
+    icon: ProjectorIcon,
+  },
+];
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { user, onLogOut } = useUserSession();
+  const { user = null, onLogOut } = useUserSession();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -50,15 +59,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <Link href="/dashboard">
-                <ArrowUpCircleIcon className="h-5 w-5" />
-                <span className="text-base font-semibold">Dashboard</span>
+                <h3 className="text-base font-semibold flex items-center space-x-2">
+                  <ArrowUpCircleIcon className="h-5 w-5" />
+                  <span>Dashboard</span>
+                </h3>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain data={data} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} onLogOut={onLogOut} />

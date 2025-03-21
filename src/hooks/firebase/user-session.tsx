@@ -14,7 +14,7 @@ export default function useUserSession() {
   const { toast } = useToast();
   const router = useRouter();
 
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>();
   const [loading, setLoading] = useState(false);
   const [mutate, setMutate] = useState(true);
 

@@ -1,8 +1,17 @@
 export default interface FrontEndDeveloperProject {
   id: string;
+  user_id: string;
   name: string;
   type: string;
-  employment_type: string;
+  employment_type:
+    | "Full-time"
+    | "Part-time"
+    | "Freelance"
+    | "Contract"
+    | "Internship"
+    | "Self Employed"
+    | "Apprenticeship"
+    | "Seasonal";
   role: string;
   description: string;
   link: string | null;

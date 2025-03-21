@@ -1,39 +1,99 @@
 "use client";
 
-import { MailIcon, PlusCircleIcon, type LucideIcon } from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
-  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@radix-ui/react-collapsible";
+import { Url } from "next/dist/shared/lib/router/router";
 
 export function NavMain({
-  items,
+  data,
 }: {
-  items: {
+  data: {
     title: string;
-    url: string;
+    url?: Url;
     icon?: LucideIcon;
+    items?: {
+      title: string;
+      url: string;
+    }[];
   }[];
 }) {
+  const path = usePathname();
+
   return (
     <SidebarGroup>
-      <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
-              </SidebarMenuButton>
+      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarMenu>
+        {data.map((menuItem) => (
+          <Collapsible
+            key={menuItem.title}
+            asChild
+            defaultOpen={path === menuItem.url}
+            className="group/collapsible"
+          >
+            <SidebarMenuItem>
+              {menuItem.items ? (
+                <>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip={menuItem.title}>
+                      {menuItem.icon && <menuItem.icon />}
+                      <span>{menuItem.title}</span>
+                      <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {menuItem.items?.map(
+                        (item: { title: string; url: string }) => (
+                          <SidebarMenuSubItem key={item.title}>
+                            <SidebarMenuSubButton asChild>
+                              <Link href={item.url}>
+                                <span>{item.title}</span>
+                              </Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        )
+                      )}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </>
+              ) : menuItem.url ? (
+                <Link href={menuItem.url} prefetch={true}>
+                  <SidebarMenuButton
+                    tooltip={menuItem.title}
+                    isActive={path === menuItem.url}
+                  >
+                    {menuItem.icon && <menuItem.icon />}
+                    <span>{menuItem.title}</span>
+                  </SidebarMenuButton>
+                </Link>
+              ) : (
+                // Disable the button when there's no URL
+                <SidebarMenuButton tooltip={menuItem.title} disabled>
+                  {menuItem.icon && <menuItem.icon />}
+                  <span>{menuItem.title}</span>
+                </SidebarMenuButton>
+              )}
             </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroupContent>
+          </Collapsible>
+        ))}
+      </SidebarMenu>
     </SidebarGroup>
   );
 }
