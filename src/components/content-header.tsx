@@ -5,7 +5,7 @@ export default function ContentHeader({
   children,
 }: {
   title: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
     <div className="w-full mb-8">
@@ -13,7 +13,6 @@ export default function ContentHeader({
         <div className="text-left">
           <p className="font-bold text-[20px]">{title}</p>
         </div>
-
         <div className="text-right">{children}</div>
       </div>
       <Separator className="my-4" />

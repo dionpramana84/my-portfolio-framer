@@ -117,13 +117,9 @@ ul {
   padding-left: 20px;
 }
 
-body:not([data-path^="/dashboard"]) ul {
-  list-style-type: none;
-  padding: 10px;
-}
-
-body:not([data-path^="/dashboard"]) li {
-  list-style-type: none;
+td,
+th {
+  padding: 0px 16px !important;
 }
 
 /* Responsive Typography */

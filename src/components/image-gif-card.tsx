@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
-import FrontEndDeveloperProject from "@/models/FrontEndDeveloperProject";
+import FrontEndDeveloperProject from "@/models/Project";
 import dayjs from "dayjs";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";

@@ -39,7 +39,7 @@ export function NavMain({
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
-      <SidebarMenu>
+      <SidebarMenu className="p-0">
         {data.map((menuItem) => (
           <Collapsible
             key={menuItem.title}
@@ -47,7 +47,7 @@ export function NavMain({
             defaultOpen={path === menuItem.url}
             className="group/collapsible"
           >
-            <SidebarMenuItem>
+            <SidebarMenuItem className="list-none">
               {menuItem.items ? (
                 <>
                   <CollapsibleTrigger asChild>

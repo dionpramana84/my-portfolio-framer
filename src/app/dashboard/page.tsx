@@ -38,7 +38,7 @@ const formSchema = z.object({
 
 export default function Page() {
   const { user } = useUserSession();
-  const { profile, onUpdate, loading } = useUserProfile(user?.uid ?? "");
+  const { profile, onUpdate, loading } = useUserProfile();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({

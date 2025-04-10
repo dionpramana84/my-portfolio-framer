@@ -6,7 +6,6 @@ import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
@@ -52,50 +51,45 @@ export default function DashboardLayout({
       <AppSidebar variant="inset" />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
+          <SidebarTrigger className="ml-1" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <Breadcrumb>
-            <BreadcrumbList>
-              {/* Dashboard Link */}
+            <BreadcrumbList className="list-none p-0">
               <BreadcrumbItem>
-                <Link href="/dashboard">
-                  <BreadcrumbLink>Dashboard</BreadcrumbLink>
+                <Link
+                  href="/dashboard"
+                  className="hover:text-white transition duration-300"
+                >
+                  Dashboard
                 </Link>
-                {pathSegments.length > 0 && <BreadcrumbSeparator />}
               </BreadcrumbItem>
 
-              {/* Dynamically render breadcrumb levels */}
+              {pathSegments.length > 0 && <BreadcrumbSeparator />}
+
               {pathSegments.map((segment, index) => {
                 const isLast = index === pathSegments.length - 1;
                 const href = `/dashboard/${pathSegments
                   .slice(0, index + 1)
                   .join("/")}`;
 
-                // ✅ Ensure "Project" is plain text (not a link)
-                if (segment.toLowerCase() === "project") {
-                  return (
-                    <BreadcrumbItem key={index}>
-                      <span className="text-muted-foreground">
-                        {formatSegment(segment)}
-                      </span>
-                      {!isLast && <BreadcrumbSeparator />}
-                    </BreadcrumbItem>
-                  );
-                }
-
                 return (
-                  <BreadcrumbItem key={index}>
-                    {isLast ? (
-                      <BreadcrumbPage>{formatSegment(segment)}</BreadcrumbPage>
-                    ) : (
-                      <Link href={href}>
-                        <BreadcrumbLink>
+                  <div key={index} className="flex items-center gap-2">
+                    <BreadcrumbItem key={index}>
+                      {isLast ? (
+                        <BreadcrumbPage>
                           {formatSegment(segment)}
-                        </BreadcrumbLink>
-                      </Link>
-                    )}
+                        </BreadcrumbPage>
+                      ) : (
+                        <Link
+                          href={href}
+                          className="hover:text-white transition duration-300"
+                        >
+                          {formatSegment(segment)}
+                        </Link>
+                      )}
+                    </BreadcrumbItem>
                     {!isLast && <BreadcrumbSeparator />}
-                  </BreadcrumbItem>
+                  </div>
                 );
               })}
             </BreadcrumbList>

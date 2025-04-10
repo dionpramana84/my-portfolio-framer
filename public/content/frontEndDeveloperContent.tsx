@@ -1,4 +1,4 @@
-import FrontEndDeveloperProject from "@/models/FrontEndDeveloperProject";
+import FrontEndDeveloperProject from "@/models/Project";
 
 const projectsData: FrontEndDeveloperProject[] = [
   {

@@ -7,19 +7,13 @@ import {
   getDocs,
   deleteDoc,
   query,
-  where,
 } from "firebase/firestore";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import UserProfile from "@/models/UserProfile";
 import { useToast } from "../use-toast";
 
-const fetchUserProfile = async (
-  user_id: string
-): Promise<UserProfile | null> => {
-  const q = query(
-    collection(db, "user-profile"),
-    where("user_id", "==", user_id)
-  );
+const fetchUserProfile = async (): Promise<UserProfile | null> => {
+  const q = query(collection(db, "user-profile"));
   const querySnapshot = await getDocs(q);
   if (querySnapshot.empty) {
     return null;
@@ -52,17 +46,16 @@ const deleteUserProfile = async (id: string) => {
   await deleteDoc(doc(db, "user-profile", id));
 };
 
-export default function useUserProfile(user_id: string | undefined) {
+export default function useUserProfile() {
   const { toast } = useToast();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(false);
   const [mutate, setMutate] = useState(true);
 
   const getUserProfile = useCallback(async () => {
-    if (!user_id) return;
     setLoading(true);
     try {
-      const data = await fetchUserProfile(user_id);
+      const data = await fetchUserProfile();
       setProfile(data);
     } catch (error) {
       toast({
@@ -74,7 +67,7 @@ export default function useUserProfile(user_id: string | undefined) {
       setLoading(false);
       setMutate(false);
     }
-  }, [user_id, toast]);
+  }, [toast]);
 
   useEffect(() => {
     if (mutate) getUserProfile();
@@ -83,7 +76,6 @@ export default function useUserProfile(user_id: string | undefined) {
   const onCreate = useCallback(
     async (profile: UserProfile) => {
       setLoading(true);
-      if (!user_id) return;
       try {
         await createUserProfile(profile);
         setMutate((prev) => !prev);
@@ -99,7 +91,7 @@ export default function useUserProfile(user_id: string | undefined) {
         });
       }
     },
-    [user_id, toast]
+    [toast]
   );
 
   const onUpdate = useCallback(
