@@ -1,34 +1,30 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import FrontEndDeveloperProject from "@/models/Project";
-import dayjs from "dayjs";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { format } from "date-fns";
 
 export default function ImageGifCard({
   name,
-  image_gif,
   image_thumbnail,
   type,
-  started_on,
-  finished_on,
-  href,
+  start_date,
+  end_date,
+  url,
   index,
 }: {
   name?: string;
-  image_gif?: string;
-  image_thumbnail: string;
-  started_on?: string;
-  finished_on?: string;
+  image_thumbnail?: string | null;
+  start_date?: Date | null;
+  end_date?: Date | null;
   type?: string;
-  href?: string;
+  url?: string;
   index?: number;
 }) {
-  const [isHovered, setIsHovered] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
-    <Link href={href ?? "/"}>
+    <Link href={url ?? "/"}>
       <motion.div
         ref={ref}
         style={{
@@ -38,8 +34,6 @@ export default function ImageGifCard({
           transitionDelay: `${index}00ms`,
         }}
         className="relative w-full h-full p-[24px] border-solid border-right border-[0.5px] border-2 border-[#1c1c1c] hover:bg-zinc-900 transition-all duration-300 ease-in-out cursor-pointer"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         {name && (
           <div className="font-black mb-[16px]">
@@ -53,23 +47,21 @@ export default function ImageGifCard({
             className="w-full h-full"
           >
             <Image
-              src={image_gif && isHovered ? image_gif : image_thumbnail}
+              src={image_thumbnail ?? ""}
               alt={name!}
-              blurDataURL={image_thumbnail}
               fill
               className="w-full h-full object-cover"
               quality={40}
-              placeholder="blur"
               priority
             />
           </motion.div>
         </div>
-        {started_on && (
+        {start_date && (
           <div className="flex justify-between mt-[16px]">
             <p>{type}</p>
             <p>
-              {dayjs(started_on).format("MMM YYYY")} -{" "}
-              {finished_on ? dayjs(finished_on).format("MMM YYYY") : "Now"}
+              {format(start_date, "PPP")} -{" "}
+              {end_date ? format(end_date, "PPP") : "Now"}
             </p>
           </div>
         )}

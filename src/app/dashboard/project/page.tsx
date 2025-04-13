@@ -13,19 +13,12 @@ import Loader from "@/components/loader";
 export default function Page() {
   const router = useRouter();
 
-  const { projects, loading, onDelete } = useProjects();
+  const { projects, loading, onDelete } = useProjects({});
   const columns = getColumns({
     updateCallback: (value) => {
       router.push(`/dashboard/project/${value.id}`);
     },
     deleteCallback: async (id: string) => {
-      const publicId = projects?.find((project) => project.id === id)
-        ?.thumbnail_url?.public_id;
-      await fetch("/api/delete-image", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ public_id: publicId }),
-      });
       onDelete(id);
     },
   });

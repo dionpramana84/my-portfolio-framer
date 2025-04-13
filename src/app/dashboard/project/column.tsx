@@ -47,20 +47,19 @@ export const getColumns = ({
       },
     },
     {
-      id: "thumbnail_url",
+      id: "images",
       header: "Thumbnail",
       cell: ({ row }) => {
         const record = row.original;
-        return (
-          record.thumbnail_url && (
-            <Image
-              src={record.thumbnail_url.url ?? ""}
-              alt="Thumbnail"
-              width={50}
-              height={50}
-            />
-          )
-        );
+        return record?.images?.map((image, index) => (
+          <Image
+            key={index}
+            src={image.url ?? ""}
+            alt="Thumbnail"
+            width={50}
+            height={50}
+          />
+        ));
       },
     },
     {

@@ -11,17 +11,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
-import { format } from "date-fns";
-import { CalendarIcon, PlusIcon, X } from "lucide-react";
+import { PlusIcon, X } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 
 import { EMPLOYMENT_TYPES, ROLE_TYPES } from "../../constant";
@@ -34,16 +27,16 @@ import {
   SelectGroup,
   SelectLabel,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
 import useProjects, { useProject } from "../../../hooks/firebase/project";
 import RichTextEditor from "./rich-text-editor";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/loader";
-import ImageCloudinary from "@/models/ImageCloudinary";
+import DatePicker from "@/components/ui/date-picker";
 
 const thumbnailSchema = z.object({
   public_id: z.string().nullable(),
   url: z.string().nullable(),
+  is_thumbnail: z.boolean(),
 });
 
 const formSchema = z.object({
@@ -62,9 +55,7 @@ const formSchema = z.object({
     .min(1, "At least one skill is required"),
   start_date: z.date().nullable(),
   end_date: z.date().nullable(),
-  thumbnail_url: z
-    .union([z.instanceof(File), thumbnailSchema, z.string().nullable()])
-    .nullable(),
+  images: z.array(thumbnailSchema).max(10).nullable(),
 });
 
 export default function ProjectForm({
@@ -74,95 +65,53 @@ export default function ProjectForm({
 }) {
   const router = useRouter();
   const [description, setDescription] = useState<string>("");
-  const [prevImage, setPrevImage] = useState<ImageCloudinary | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       company_name: null,
-      role_type: "Front-End Developer",
+      role_type: "front-end-developer",
       employment_type: "Full-time",
       description: null,
       link_url: null,
       skills: [],
       start_date: null,
       end_date: null,
-      thumbnail_url: null,
+      images: null,
     },
   });
 
-  const { onCreate, loading: loadingProjects } = useProjects();
+  const { fields } = useFieldArray({
+    name: "images",
+    control: form.control,
+  });
+  const { onCreate, loading: loadingProjects } = useProjects({});
   const {
     project,
-    onUpdate,
     loading: loadingProject,
+    onUpdate,
   } = useProject({
     id: selectedProjectId ?? "",
   });
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const thumbnail = values.thumbnail_url;
-      let imageData: ImageCloudinary | null = null;
-
-      const deleteImage = async (public_id: string | null) => {
-        if (!public_id) return;
-        await fetch("/api/delete-image", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ public_id }),
-        });
-      };
-
-      const uploadImage = async (
-        file: File
-      ): Promise<ImageCloudinary | null> => {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        const res = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await res.json();
-
-        if (!res.ok) throw new Error(data.error || "Image upload failed");
-
-        return { url: data.url, public_id: data.public_id };
-      };
-
-      const isImageRemoved =
-        !thumbnail && typeof prevImage?.public_id === "string";
-
-      if (isImageRemoved) {
-        await deleteImage(prevImage?.public_id ?? null);
-      }
-
-      if (thumbnail instanceof File) {
-        if (project?.thumbnail_url) {
-          await deleteImage(prevImage?.public_id ?? null);
-        }
-        imageData = await uploadImage(thumbnail);
-      } else if (typeof thumbnail === "string") {
-        imageData = { url: thumbnail, public_id: null };
-      } else if (thumbnail && "url" in thumbnail) {
-        imageData = {
-          url: thumbnail.url ?? null,
-          public_id: thumbnail.public_id ?? null,
-        };
-      }
-
       const formattedValues = {
         ...values,
         skills: values.skills.map((s) => s.value),
         description,
-        thumbnail_url: imageData,
       };
 
-      selectedProjectId
-        ? await onUpdate?.(selectedProjectId, formattedValues)
-        : await onCreate?.(formattedValues);
+      if (selectedProjectId) {
+        await onUpdate(
+          selectedProjectId,
+          formattedValues,
+          project?.images || []
+        );
+      } else {
+        await onCreate(formattedValues);
+      }
 
       form.reset();
       router.push("/dashboard/project");
@@ -173,17 +122,11 @@ export default function ProjectForm({
   };
 
   const handleDeleteImage = () => {
-    form.setValue("thumbnail_url", null, { shouldDirty: true });
+    form.setValue("images", null, { shouldDirty: true });
   };
 
   useEffect(() => {
     if (selectedProjectId && project) {
-      const existingImage = {
-        public_id:
-          (project.thumbnail_url as ImageCloudinary)?.public_id || null,
-        url: project.thumbnail_url?.url || null,
-      };
-
       form.reset({
         name: project.name || "",
         company_name: project.company_name || null,
@@ -196,10 +139,14 @@ export default function ProjectForm({
           [],
         start_date: project.start_date ? new Date(project.start_date) : null,
         end_date: project.end_date ? new Date(project.end_date) : null,
-        thumbnail_url: existingImage,
+        images:
+          project.images?.map((img) => ({
+            url: img.url ?? null,
+            public_id: img.public_id ?? null,
+            is_thumbnail: img.is_thumbnail ?? false,
+          })) || [],
       });
 
-      setPrevImage(existingImage); // ← Save the original image
       setDescription(project.description || "");
     }
   }, [selectedProjectId, project, form]);
@@ -264,7 +211,13 @@ export default function ProjectForm({
                           <SelectLabel>Role Type</SelectLabel>
                           {ROLE_TYPES.map((roleType) => (
                             <SelectItem key={roleType} value={roleType}>
-                              {roleType}
+                              {roleType
+                                .split("-")
+                                .map(
+                                  (word) =>
+                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                )
+                                .join(" ")}
                             </SelectItem>
                           ))}
                         </SelectGroup>
@@ -334,37 +287,12 @@ export default function ProjectForm({
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Start Date</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-full text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "yyyy-MM-dd")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent align="start" side="bottom" forceMount>
-                      <Calendar
-                        mode="single"
-                        selected={field.value ?? undefined}
-                        onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
-                        }
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
+                  <FormControl>
+                    <DatePicker
+                      date={field.value ?? null}
+                      setDate={field.onChange}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -377,33 +305,12 @@ export default function ProjectForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>End Date</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-full text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "yyyy-MM-dd")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent align="start" side="bottom" forceMount>
-                      <Calendar
-                        mode="single"
-                        selected={field.value ?? undefined}
-                        onSelect={(date) => field.onChange(date)}
-                      />
-                    </PopoverContent>
-                  </Popover>
+                  <FormControl>
+                    <DatePicker
+                      date={field.value ?? null}
+                      setDate={field.onChange}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -487,60 +394,130 @@ export default function ProjectForm({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="thumbnail_url"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Picture</FormLabel>
-                  <FormControl>
-                    <>
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            field.onChange(file);
-                          }
-                        }}
-                        onBlur={field.onBlur}
-                        name={field.name}
-                        ref={field.ref}
-                      />
 
-                      {/* ✅ Image preview logic */}
-                      {field.value && (
-                        <div className="mt-2 space-y-2">
-                          <Image
-                            src={
-                              field.value instanceof File
-                                ? URL.createObjectURL(field.value)
-                                : typeof field.value === "string"
-                                ? field.value
-                                : field.value?.url ?? ""
-                            }
-                            alt="Thumbnail preview"
-                            width={200}
-                            height={150}
-                            className="rounded-md object-cover"
-                          />
-                          <Button
-                            type="button"
-                            variant="destructive"
-                            size="sm"
-                            onClick={handleDeleteImage}
-                          >
-                            Delete Image
-                          </Button>
-                        </div>
-                      )}
-                    </>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-2 gap-1">
+              {fields.map((imageField, index) => {
+                const images = form.watch("images") || [];
+
+                return (
+                  <div
+                    key={imageField.id}
+                    className="relative border p-3 rounded-md"
+                  >
+                    {/* Image Preview or Input */}
+                    {images[index]?.url ? (
+                      <div className="relative">
+                        <Image
+                          src={images[index].url!}
+                          alt={`Image ${index + 1}`}
+                          width={200}
+                          height={150}
+                          className="rounded-md object-cover w-full h-auto"
+                        />
+                        <Button
+                          type="button"
+                          size="icon"
+                          variant="ghost"
+                          className="absolute top-1 right-1 bg-white/80 hover:bg-white/100"
+                          onClick={() => {
+                            const updated = [...images];
+                            updated.splice(index, 1);
+                            form.setValue("images", updated, {
+                              shouldDirty: true,
+                            });
+                          }}
+                        >
+                          <X className="h-4 w-4 text-red-500" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <FormField
+                        key={imageField.id}
+                        control={form.control}
+                        name={`images.${index}`}
+                        render={() => (
+                          <FormItem>
+                            <FormLabel>Upload Image</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  if (!file) return;
+
+                                  const reader = new FileReader();
+                                  reader.onloadend = () => {
+                                    const newImages = [
+                                      ...(form.watch("images") || []),
+                                    ];
+                                    newImages[index] = {
+                                      url: reader.result as string,
+                                      public_id: null,
+                                      is_thumbnail: false,
+                                    };
+
+                                    form.setValue("images", newImages, {
+                                      shouldDirty: true,
+                                    });
+                                  };
+                                  reader.readAsDataURL(file);
+                                }}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+
+                    {/* Thumbnail Checkbox */}
+                    {images[index]?.url && (
+                      <div className="flex items-center mt-2 space-x-2">
+                        <input
+                          type="checkbox"
+                          checked={images[index]?.is_thumbnail || false}
+                          onChange={() => {
+                            const updated = images.map((img, i) => ({
+                              ...img,
+                              is_thumbnail: i === index,
+                            }));
+                            form.setValue("images", updated, {
+                              shouldDirty: true,
+                            });
+                          }}
+                        />
+                        <label>Set as Thumbnail</label>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {(form.watch("images") || []).length < 10 && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  const current = form.watch("images") || [];
+                  form.setValue(
+                    "images",
+                    [
+                      ...current,
+                      {
+                        url: null,
+                        public_id: null,
+                        is_thumbnail: false,
+                      },
+                    ],
+                    { shouldDirty: true }
+                  );
+                }}
+              >
+                <PlusIcon className="h-4 w-4 mr-2" /> Add Image
+              </Button>
+            )}
           </div>
         </div>
       </form>

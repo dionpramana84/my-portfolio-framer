@@ -1,6 +1,6 @@
 import GenericFields from "./GenericFields";
 import { EMPLOYMENT_TYPE, ROLE_TYPE } from "@/components/constant";
-import ImageCloudinary from "./ImageCloudinary";
+import ImageCloud from "./ImageCloud";
 
 export default interface Project extends GenericFields {
   name: string;
@@ -12,5 +12,5 @@ export default interface Project extends GenericFields {
   start_date?: Date | null;
   end_date?: Date | null;
   company_name?: string | null;
-  thumbnail_url?: ImageCloudinary | null;
+  images?: ImageCloud[] | null;
 }
