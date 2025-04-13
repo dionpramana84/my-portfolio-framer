@@ -7,10 +7,8 @@ import {
   DrawerClose,
 } from "@/components/ui/drawer";
 import { MenuIcon } from "lucide-react";
-import { ModeToggleComponent } from "./mode-toggle";
 import { Button } from "./ui/button";
 import {
-  Cross1Icon,
   GitHubLogoIcon,
   InstagramLogoIcon,
   LinkedInLogoIcon,

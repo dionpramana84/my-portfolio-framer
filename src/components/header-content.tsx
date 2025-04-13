@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import DrawerComponent from "./drawer";
-import MainLayout from "./main-layout";
 
 export default function HeaderContent() {
   return (

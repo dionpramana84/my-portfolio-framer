@@ -8,7 +8,6 @@ import {
   renderToStream,
 } from "@react-pdf/renderer";
 import { NextResponse } from "next/server";
-import { unknown } from "zod";
 
 // Create styles
 const styles = StyleSheet.create({
@@ -165,6 +164,7 @@ export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
+  // eslint-disable-next-line no-unused-vars
   const invoiceId = parseInt(params.id);
 
   const stream = await renderToStream(<MyDocument />);

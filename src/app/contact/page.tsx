@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -40,7 +39,7 @@ export default function ContactPage() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // This is where you would typically send the form data to your backend
+    // eslint-disable-next-line no-console
     console.log(values);
   }
 

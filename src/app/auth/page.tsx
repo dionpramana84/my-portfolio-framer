@@ -1,10 +1,6 @@
 "use client";
 
 import { LoginForm } from "@/components/login-form";
-import { auth } from "@/lib/firebase/config";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Page() {
   return (
