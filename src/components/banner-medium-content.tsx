@@ -46,15 +46,18 @@ export default function BannerMediumContent({
                     <h3 className="font-black">{name.toUpperCase()}</h3>
                   </div>
                   <div className="flex flex-col self-end text-left md:text-right">
-                    <Link target="_blank" href={link ?? "#"}>
-                      <Button
-                        variant="outline"
-                        className="mb-[16px] w-28"
-                        disabled={!link}
-                      >
-                        VISIT SITE <ArrowTopRightIcon />
-                      </Button>
-                    </Link>
+                    {link && (
+                      <Link target="_blank" href={link}>
+                        <Button
+                          variant="outline"
+                          className="mb-[16px] w-28"
+                          disabled={!link}
+                        >
+                          VISIT SITE <ArrowTopRightIcon />
+                        </Button>
+                      </Link>
+                    )}
+
                     <p className="font-black hidden md:block">
                       {employment_type}{" "}
                       {company_name ? `| ${company_name}` : ""}

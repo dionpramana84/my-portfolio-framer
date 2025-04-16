@@ -31,7 +31,7 @@ export default function DashboardLayout({
   const path = usePathname();
 
   useEffect(() => {
-    if (!user && !loading) router.push("/main/auth");
+    if (!user && !loading) router.push("/auth");
   }, [user, loading, router]);
 
   if (!user) return null;

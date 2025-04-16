@@ -60,8 +60,8 @@ export default function ImageGifCard({
           <div className="flex justify-between mt-[16px]">
             <p>{type}</p>
             <p>
-              {format(start_date, "PPP")} -{" "}
-              {end_date ? format(end_date, "PPP") : "Now"}
+              {format(start_date, "MMM Y")} -{" "}
+              {end_date ? format(end_date, "MMM Y") : "Now"}
             </p>
           </div>
         )}

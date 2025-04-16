@@ -18,6 +18,7 @@ export default function RichTextEditor({
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
+        history: false,
         bulletList: {
           HTMLAttributes: {
             class: "list-disc",

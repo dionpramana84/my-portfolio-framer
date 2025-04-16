@@ -37,7 +37,12 @@ export default function Page() {
           end_date={project.end_date ?? new Date()}
           name={project.name}
           start_date={project.start_date ?? new Date()}
-          image_thumbnail={imageThumbnail?.url ?? "/barong_statue.webp"}
+          image_thumbnail={
+            imageThumbnail?.url ??
+            (role === "front-end-developer"
+              ? "/barong-black.webp"
+              : "/mining-1.webp")
+          }
           link={project.link_url}
           height="50vh"
           company_name={project.company_name}
@@ -49,7 +54,9 @@ export default function Page() {
           <div className="mb-[32px] text-justify w-full sm:w-[70vw]">
             <h6 className="font-black">Role : {project.role_type}</h6>
             <br />
-            <p>{project.description}</p>
+            <div
+              dangerouslySetInnerHTML={{ __html: project.description ?? "" }}
+            />
             <br />
             <div className="w-[fit-content] flex flex-wrap gap-4 justify-between">
               {project.skills?.map((skill, index) => (
@@ -62,11 +69,17 @@ export default function Page() {
         </div>
       </MainLayout>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-[64px] md:my-[128px] lg:my-[156px]">
-        {project.images?.map((image, index) => (
-          <ImageGifCard image_thumbnail={image.url} key={index} index={index} />
-        ))}
-      </div>
+      {project.images?.length !== 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full my-[64px] md:my-[128px] lg:my-[156px]">
+          {project.images?.map((image, index) => (
+            <ImageGifCard
+              image_thumbnail={image.url}
+              key={index}
+              index={index}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }

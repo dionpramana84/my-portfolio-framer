@@ -36,11 +36,11 @@ export default function Page() {
           }
         />
       </PageBanner>
-      <div className="my-[24px] md:my-[48px] lg:my-[84px]">
+      <div className="my-[24px]">
         <MainLayout>
           <h6 className="font-black mb-[24px]">PROJECTS</h6>
         </MainLayout>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full">
           {!projects ? (
             <Loader2 className="animate-spin mr-1" />
           ) : (
@@ -51,7 +51,10 @@ export default function Page() {
                 end_date={project.end_date}
                 name={project.name}
                 image_thumbnail={
-                  project.images?.find((image) => image.is_thumbnail)?.url
+                  project.images?.find((image) => image.is_thumbnail)?.url ??
+                  (role === "front-end-developer"
+                    ? "/barong-black.webp"
+                    : `/mining-${Math.floor(Math.random() * 3) + 1}.webp`)
                 }
                 type={project.employment_type}
                 url={`/main/${role}/${project.id}`}

@@ -56,6 +56,7 @@ export default function useUserProfile() {
     setLoading(true);
     try {
       const data = await fetchUserProfile();
+
       setProfile(data);
     } catch (error) {
       toast({

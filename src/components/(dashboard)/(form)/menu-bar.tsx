@@ -6,6 +6,7 @@ import {
   AlignLeft,
   AlignRight,
   Bold,
+  ChevronDown,
   Heading6,
   Highlighter,
   Italic,
@@ -70,6 +71,11 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
       icon: <ListOrdered className="size-4" />,
       onClick: () => editor.chain().focus().toggleOrderedList().run(),
       pressed: editor.isActive("orderedList"),
+    },
+    {
+      icon: <ChevronDown className="size-4" />,
+      onClick: () => editor.chain().focus().setHardBreak().run(),
+      pressed: editor.isActive("hardBreak"),
     },
   ];
 

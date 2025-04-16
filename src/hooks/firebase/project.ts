@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   updateDoc,
   where,
@@ -18,14 +19,17 @@ import { format, formatISO } from "date-fns";
 import { ROLE_TYPE } from "@/components/constant";
 
 export type ProjectSubmission = Omit<Project, GenericOmittedFields>;
-
 const fetchProjects = async (role_type?: ROLE_TYPE): Promise<Project[]> => {
   let q;
 
   if (role_type) {
-    q = query(collection(db, "projects"), where("role_type", "==", role_type));
+    q = query(
+      collection(db, "projects"),
+      orderBy("start_date", "desc"),
+      where("role_type", "==", role_type)
+    );
   } else {
-    q = query(collection(db, "projects"));
+    q = query(collection(db, "projects"), orderBy("start_date"));
   }
 
   const querySnapshot = await getDocs(q);

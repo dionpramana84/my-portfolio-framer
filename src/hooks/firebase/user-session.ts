@@ -65,7 +65,7 @@ export default function useUserSession() {
       toast({
         title: "Logout success!",
       });
-      router.push("/main/auth");
+      router.push("/auth");
     } catch (error) {
       setLoading(false);
       toast({
