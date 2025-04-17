@@ -1,6 +1,5 @@
 import DelayedFading from "@/animation/delayed-fading";
 import Image from "next/image";
-import { title } from "process";
 import HeaderContent from "./header-content";
 import MainLayout from "./main-layout";
 

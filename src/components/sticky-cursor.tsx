@@ -26,6 +26,7 @@ export default function StickyCursor() {
     return () => {
       window.removeEventListener("mousemove", manageMouseMove);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

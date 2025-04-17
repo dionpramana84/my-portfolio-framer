@@ -7,10 +7,8 @@ import {
   DrawerClose,
 } from "@/components/ui/drawer";
 import { MenuIcon } from "lucide-react";
-import { ModeToggleComponent } from "./mode-toggle";
 import { Button } from "./ui/button";
 import {
-  Cross1Icon,
   GitHubLogoIcon,
   InstagramLogoIcon,
   LinkedInLogoIcon,
@@ -25,19 +23,19 @@ export default function DrawerComponent() {
     },
     {
       title: "About",
-      href: "/about",
+      href: "/main/about",
     },
     {
       title: "Front End Developer",
-      href: "/front-end-developer",
+      href: "/main/front-end-developer",
     },
     {
       title: "Mining Engineer",
-      href: "/mining-engineer",
+      href: "/main/mining-engineer",
     },
     {
       title: "Contact",
-      href: "/contact",
+      href: "/main/contact",
     },
   ];
 

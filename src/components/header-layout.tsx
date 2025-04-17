@@ -8,12 +8,13 @@ export default function HeaderLayout() {
   const path = usePathname();
   return (
     <>
-      {path.includes("mining-engineer") ||
-      path.includes("front-end-developer") ? (
-        <DynamicHeader />
-      ) : (
-        <Header />
-      )}
+      {!path.startsWith("/dashboard") &&
+        (path.includes("mining-engineer") ||
+        path.includes("front-end-developer") ? (
+          <DynamicHeader />
+        ) : (
+          <Header />
+        ))}
     </>
   );
 }

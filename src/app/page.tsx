@@ -15,7 +15,7 @@ export default function Home() {
               <div className="flex h-auto items-end mr-[16px]">
                 <ArrowTopRightIcon className="h-[1.2rem] w-[1.2rem]" />
               </div>
-              <Link href="/mining-engineer">
+              <Link href="/main/mining-engineer">
                 <div className="relative !h-[45vh] w-[80px] md:w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[200px] md:hover:w-[200px] xl:hover:w-[250px] transition-all duration-300 ease group">
                   <Image
                     src="/mining.webp"
@@ -27,7 +27,7 @@ export default function Home() {
                   />
                 </div>
               </Link>
-              <Link href="/front-end-developer">
+              <Link href="/main/front-end-developer">
                 <div className="relative !h-[45vh] w-[80px] md:w-[150px] mr-[16px] filter grayscale hover:grayscale-0 hover:w-[100px] md:hover:w-[200px] xl:hover:w-[250px] transition-all duration-300 ease group">
                   <Image
                     src="/web-dev.webp"

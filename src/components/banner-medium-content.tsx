@@ -1,31 +1,29 @@
 import DelayedFading from "@/animation/delayed-fading";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
-import dayjs from "dayjs";
-import Link from "next/link";
 import MainLayout from "./main-layout";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import HeaderContent from "./header-content";
 import React from "react";
+import { format } from "date-fns";
+import Link from "next/link";
 
 export default function BannerMediumContent({
   employment_type,
   name,
-  started_on,
-  finished_on,
+  start_date,
+  end_date,
   link,
   image_thumbnail,
-  image_gif,
   height = "50vh",
   company_name,
 }: {
   employment_type: string;
   name: string;
-  started_on: string;
-  finished_on: string | null;
+  start_date: Date;
+  end_date: Date;
   link?: string | null;
   image_thumbnail: string;
-  image_gif?: string;
   height?: string;
   company_name?: string | null;
 }) {
@@ -42,45 +40,31 @@ export default function BannerMediumContent({
                 <div className="grid grid-cols-1 md:grid-cols-[70%_30%] w-full">
                   <div className="w-full mb-4 md:mb-0">
                     <p className="font-black md:hidden">
-                      {employment_type} | {dayjs(started_on).format("MMM YYYY")}{" "}
-                      -{" "}
-                      {finished_on !== null
-                        ? dayjs(finished_on).format("MMM YYYY")
-                        : "Now"}
+                      {employment_type} | {format(start_date, "PPP")} -{" "}
+                      {end_date !== null ? format(end_date, "PPP") : "Now"}
                     </p>
                     <h3 className="font-black">{name.toUpperCase()}</h3>
                   </div>
                   <div className="flex flex-col self-end text-left md:text-right">
-                    {link ? (
-                      <Link
-                        href={link}
-                        target="_blank"
-                        className="flex justify-end"
-                      >
-                        <Button variant="outline" className="mb-[16px] w-28">
-                          VISIT SITE <ArrowTopRightIcon />
-                        </Button>
-                      </Link>
-                    ) : (
-                      <div className="flex justify-end">
+                    {link && (
+                      <Link target="_blank" href={link}>
                         <Button
                           variant="outline"
                           className="mb-[16px] w-28"
-                          disabled
+                          disabled={!link}
                         >
-                          VISIT SITE
+                          VISIT SITE <ArrowTopRightIcon />
                         </Button>
-                      </div>
+                      </Link>
                     )}
+
                     <p className="font-black hidden md:block">
                       {employment_type}{" "}
                       {company_name ? `| ${company_name}` : ""}
                     </p>
                     <p className="hidden md:block">
-                      {dayjs(started_on).format("MMM YYYY")} -{" "}
-                      {finished_on !== null
-                        ? dayjs(finished_on).format("MMM YYYY")
-                        : "Now"}
+                      {format(start_date, "PPP")} -{" "}
+                      {end_date !== null ? format(end_date, "PPP") : "Now"}
                     </p>
                   </div>
                 </div>
@@ -94,7 +78,7 @@ export default function BannerMediumContent({
         className={`absolute w-full h-[${height}]  top-0 z-[-1] brightness-50 invert-0`}
       >
         <Image
-          src={image_gif ? image_gif : image_thumbnail}
+          src={image_thumbnail}
           alt="Photo by Drew Beamer"
           fill
           className="object-cover"
