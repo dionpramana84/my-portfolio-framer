@@ -22,10 +22,6 @@ export default function DrawerComponent() {
       href: "/",
     },
     {
-      title: "About",
-      href: "/main/about",
-    },
-    {
       title: "Front End Developer",
       href: "/main/front-end-developer",
     },
@@ -34,8 +30,16 @@ export default function DrawerComponent() {
       href: "/main/mining-engineer",
     },
     {
+      title: "Self Project",
+      href: "/self-project",
+    },
+    {
       title: "Contact",
-      href: "/main/contact",
+      href: "/contact",
+    },
+    {
+      title: "About",
+      href: "/about",
     },
   ];
 
