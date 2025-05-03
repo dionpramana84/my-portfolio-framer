@@ -38,8 +38,8 @@ export default function DynamicHeader() {
                 src="/logo-dion.webp"
                 alt="Logo"
                 height={32}
-                width={32}
-                className="object-cover"
+                width={42}
+                className="object-cover h-[32px] w-[42px]"
                 priority
                 quality={50}
               />

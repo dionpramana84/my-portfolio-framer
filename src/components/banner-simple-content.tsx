@@ -9,7 +9,7 @@ export default function BannerSimpleContent({
   image,
 }: {
   title: string;
-  subTitle: JSX.Element;
+  subTitle?: JSX.Element;
   image: string;
 }) {
   return (

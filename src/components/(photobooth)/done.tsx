@@ -22,8 +22,8 @@ export default function Done() {
     const scaledBoxSize = boxSize * scale;
     const scaledPadding = padding * scale;
     const scaledImgSize = imgSize * scale;
-    const headerHeight = 100 * scale; // h-[100px]
-    const footerHeight = 50 * scale; // h-[50px]
+    const headerHeight = 100 * scale;
+    const footerHeight = 50 * scale;
 
     // Calculate layout
     let cols = 1,
@@ -52,7 +52,7 @@ export default function Done() {
     // Optional: add header/footer text
 
     ctx.fillStyle = "#000";
-    ctx.font = `${14 * scale}px sans-serif`;
+    ctx.font = `${14 * scale}px sans`;
     ctx.textAlign = "center";
     ctx.fillText("Photobooth 2025", canvas.width / 2, headerHeight / 2);
     ctx.fillText(
