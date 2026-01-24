@@ -33,7 +33,9 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
           <HeaderLayout />
-          {children}
+          <div className="min-h-[calc(100vh-84px)]">
+            {children}
+          </div>
           <Toaster />
           <Footer />
         </ThemeProvider>
