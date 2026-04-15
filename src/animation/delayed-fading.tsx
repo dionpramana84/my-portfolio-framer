@@ -24,8 +24,9 @@ export default function DelayedFading({
   delay?: number;
   duration?: number;
 }) {
+  const MotionDiv = motion.div as any;
   return (
-    <motion.div
+    <MotionDiv
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: "easeIn", delay: delay, duration: duration }}
@@ -33,6 +34,6 @@ export default function DelayedFading({
       style={style}
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 }

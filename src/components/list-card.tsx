@@ -12,11 +12,12 @@ export default function ListCard({
   url?: string | null;
   index: number;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref as any, { once: true });
+  const MotionDiv = motion.div as any;
   return (
     <Link href={url ?? "/"}>
-      <motion.div
+      <MotionDiv
         ref={ref}
         style={{
           transform: isInView ? "none" : "translateY(100px)",
@@ -32,7 +33,7 @@ export default function ListCard({
           </p>
           {url && <ArrowTopRightIcon className="self-end" />}
         </div>
-      </motion.div>
+      </MotionDiv>
     </Link>
   );
 }

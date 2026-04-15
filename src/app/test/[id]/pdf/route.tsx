@@ -162,10 +162,11 @@ const MyDocument = () => (
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   // eslint-disable-next-line no-unused-vars
-  const invoiceId = parseInt(params.id);
+  const { id } = await params;
+  const invoiceId = parseInt(id);
 
   const stream = await renderToStream(<MyDocument />);
 

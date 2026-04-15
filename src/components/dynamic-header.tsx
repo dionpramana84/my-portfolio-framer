@@ -23,8 +23,9 @@ export default function DynamicHeader() {
     return () => unsubscribe(); // Cleanup the listener when the component unmounts
   }, [scrollY]);
 
+  const MotionDiv = motion.div as any;
   return (
-    <motion.div
+    <MotionDiv
       className={`fixed h-[${slideDistance}] w-full z-[9999] top-0 py-[16px] bg-black/10 shadow-lg shadow-zinc-900/30 backdrop-blur-[5px]`}
       initial={{ y: -slideDistance }}
       animate={{ y: isInView ? 0 : -slideDistance }}
@@ -50,6 +51,6 @@ export default function DynamicHeader() {
           </div>
         </div>
       </MainLayout>
-    </motion.div>
+    </MotionDiv>
   );
 }

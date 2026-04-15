@@ -29,8 +29,9 @@ export default function StickyCursor() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const MotionDiv = motion.div as any;
   return (
-    <motion.div
+    <MotionDiv
       className="fixed w-[15px] h-[15px] bg-white rounded-full pointer-events-none z-[9999] hidden md:block"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

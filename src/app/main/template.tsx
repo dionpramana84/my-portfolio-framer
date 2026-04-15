@@ -17,10 +17,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
     return () => clearTimeout(timer);
   }, []);
 
+  const MotionDiv = motion.div as any;
   return (
     <AnimatePresence mode="wait">
       {isLoading ? (
-        <motion.div
+        <MotionDiv
           key="loading"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -44,9 +45,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
               className="mb-4 w-[60px] h-[auto] md:w-[auto] md:h-[80px] lg:w-[120px] lg:h-[auto]"
             />
           </div>
-        </motion.div>
+        </MotionDiv>
       ) : (
-        <motion.div
+        <MotionDiv
           key="content"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -54,7 +55,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           transition={{ duration: 0.5 }}
         >
           {children}
-        </motion.div>
+        </MotionDiv>
       )}
     </AnimatePresence>
   );

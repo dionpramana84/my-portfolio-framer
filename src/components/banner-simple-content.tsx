@@ -1,3 +1,4 @@
+import React from "react";
 import DelayedFading from "@/animation/delayed-fading";
 import Image from "next/image";
 import HeaderContent from "./header-content";
@@ -9,7 +10,7 @@ export default function BannerSimpleContent({
   image,
 }: {
   title: string;
-  subTitle?: JSX.Element;
+  subTitle?: React.ReactNode;
   image: string;
 }) {
   return (

@@ -10,8 +10,8 @@ export default function BottomToTopFadingAnimation({
   delay?: string;
   className?: string;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref as any, { once: true });
   return (
     <div ref={ref} className={className}>
       <div

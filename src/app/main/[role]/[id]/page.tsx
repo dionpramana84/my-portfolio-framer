@@ -11,7 +11,7 @@ import { useProject } from "@/hooks/firebase/project";
 
 export default function Page() {
   const { role, id } = useParams();
-  const projectId = Array.isArray(id) ? id[0] : id;
+  const projectId = (Array.isArray(id) ? id[0] : id) ?? "";
 
   const { project } = useProject({ id: projectId });
 
